@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Tienda de Videojuegos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .description {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border-left: 4px solid #007bff;
+        }
+        .start-button {
+            background-color: #007bff;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto;
+        }
+        .start-button:hover {
+            background-color: #0056b3;
+        }
+        .console-info {
+            background-color: #fff3cd;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+            border: 1px solid #ffeaa7;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 Simulador de Tienda de Videojuegos</h1>
+        
+        <div class="description">
+            <h3>Descripción del Simulador:</h3>
+            <p>
+                Este simulador permite gestionar una tienda virtual de videojuegos donde los usuarios pueden 
+                explorar un catálogo de juegos, agregar productos a su carrito de compras, aplicar descuentos 
+                según la cantidad de juegos comprados, y procesar la compra final.
+            </p>
+            <p>
+                El sistema incluye funcionalidades como visualización del inventario, cálculo automático de 
+                totales con descuentos progresivos, y un proceso completo de checkout. Toda la interacción 
+                se realiza a través de la consola del navegador y cuadros de diálogo.
+            </p>
+        </div>
+
+        <button class="start-button" onclick="iniciarSimulador()">
+            🚀 Iniciar Simulador
+        </button>
+
+        <div class="console-info">
+            <strong>📋 Instrucciones:</strong>
+            <ul>
+                <li>Haz clic en "Iniciar Simulador" para comenzar</li>
+                <li>Abre la consola del navegador (F12) para ver los detalles</li>
+                <li>Sigue las instrucciones en los cuadros de diálogo</li>
+                <li>El simulador te guiará paso a paso</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="simulador.js"></script>
+</body>
+</html>
