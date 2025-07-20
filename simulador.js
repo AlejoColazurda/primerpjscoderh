@@ -1,5 +1,3 @@
-// ==================== VARIABLES Y CONSTANTES ====================
-
 // Constantes del sistema
 const DESCUENTO_3_JUEGOS = 0.1 // 10% descuento por 3 juegos
 const DESCUENTO_5_JUEGOS = 0.15 // 15% descuento por 5 juegos
@@ -227,7 +225,19 @@ function buscarPorCategoria() {
 function agregarJuegoAlCarrito() {
   console.log("\n🛒 AGREGAR JUEGO AL CARRITO")
 
-  const idJuego = prompt("🎮 Decime el ID del juego que querés agregar al carrito:")
+  // Mostrar catálogo resumido para facilitar la selección
+  let catalogoResumido = "🎮 JUEGOS DISPONIBLES:\n\n"
+
+  for (let i = 0; i < catalogoJuegos.length; i++) {
+    const juego = catalogoJuegos[i]
+    if (juego.stock > 0) {
+      catalogoResumido += `${juego.id}. ${juego.nombre} - $${juego.precio} (Stock: ${juego.stock})\n`
+    }
+  }
+
+  catalogoResumido += "\n¿Cuál querés agregar al carrito?"
+
+  const idJuego = prompt(catalogoResumido + "\n\nDecime el ID del juego:")
 
   if (!idJuego) return
 
@@ -296,9 +306,40 @@ function agregarJuegoAlCarrito() {
   juegoEncontrado.stock -= cantidad
 
   console.log(`✅ ${cantidad}x ${juegoEncontrado.nombre} agregado al carrito`)
-  alert(
-    `✅ ¡Bárbaro! ${cantidad}x ${juegoEncontrado.nombre} agregado al carrito!\n💰 Subtotal: $${(juegoEncontrado.precio * cantidad).toFixed(2)}`,
-  )
+
+  // Mensaje personalizado según el juego
+  let mensajePersonalizado = `✅ ¡Bárbaro! ${cantidad}x ${juegoEncontrado.nombre} agregado al carrito!\n💰 Subtotal: $${(juegoEncontrado.precio * cantidad).toFixed(2)}\n\n`
+
+  // Agregar comentarios especiales según el juego
+  if (juegoEncontrado.nombre.includes("FIFA") || juegoEncontrado.nombre.includes("Call of Duty")) {
+    mensajePersonalizado += "🔥 ¡Te estás llevando uno de los más buscados!\n"
+  } else if (juegoEncontrado.nombre.includes("Zelda") || juegoEncontrado.nombre.includes("Mario")) {
+    mensajePersonalizado += "🌟 ¡Excelente elección! Un clásico que nunca falla.\n"
+  } else if (juegoEncontrado.nombre.includes("Minecraft")) {
+    mensajePersonalizado += "⛏️ ¡Perfecto para crear mundos increíbles!\n"
+  } else if (juegoEncontrado.nombre.includes("Cyberpunk")) {
+    mensajePersonalizado += "🤖 ¡Te va a volar la cabeza este juego!\n"
+  }
+
+  // Calcular total de juegos en carrito
+  let totalJuegos = 0
+  for (let i = 0; i < carritoCompras.length; i++) {
+    totalJuegos += carritoCompras[i].cantidad
+  }
+
+  // Sugerencia de finalizar compra si tiene varios juegos
+  if (totalJuegos >= 3) {
+    mensajePersonalizado += `\n🎯 Ya tenés ${totalJuegos} juegos en el carrito.\n¿Querés que finalicemos tu compra para asegurártelos?`
+
+    const finalizarAhora = confirm(mensajePersonalizado)
+
+    if (finalizarAhora) {
+      procesarCompra()
+      return
+    }
+  } else {
+    alert(mensajePersonalizado)
+  }
 }
 
 /**
