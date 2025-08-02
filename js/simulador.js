@@ -524,7 +524,7 @@ function procesarCompra() {
 
 /**
  * Función para confirmar la salida del simulador
- * @returns {boolean} false si quiere salir, true si quiere continuar
+ * @returns {boolean} 
  */
 function confirmarSalida() {
   const confirmar = confirm("🚪 ¿Seguro que te querés ir?\n\nSe va a borrar todo lo que tenés en el carrito.")
@@ -532,10 +532,10 @@ function confirmarSalida() {
   if (confirmar) {
     alert("👋 ¡Gracias por venir a nuestro local!\n🎮 ¡Volvé pronto por más juegos copados!")
     console.log("👋 Usuario salió del simulador")
-    return false // Salir del bucle
+    return false 
   }
 
-  return true // Continuar en el simulador
+  return true 
 }
 
 // ==================== FUNCIONES DE UTILIDAD ====================
