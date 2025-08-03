@@ -3,89 +3,291 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simulador de Tienda de Videojuegos</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            background-color: #f4f4f4;
-        }
-        .container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        h1 {
-            color: #333;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .description {
-            background-color: #e8f4f8;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-            border-left: 4px solid #007bff;
-        }
-        .start-button {
-            background-color: #007bff;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            display: block;
-            margin: 20px auto;
-        }
-        .start-button:hover {
-            background-color: #0056b3;
-        }
-        .console-info {
-            background-color: #fff3cd;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 20px;
-            border: 1px solid #ffeaa7;
-        }
-    </style>
+    <title>Tienda de Juegos - Entrega 2</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1>🎮 Simulador de Tienda de Videojuegos</h1>
-        
-        <div class="description">
-            <h3>Descripción del Simulador:</h3>
-            <p>
-                Este simulador permite gestionar una tienda virtual de videojuegos donde los usuarios pueden 
-                explorar un catálogo de juegos, agregar productos a su carrito de compras, aplicar descuentos 
-                según la cantidad de juegos comprados, y procesar la compra final.
-            </p>
-            <p>
-                El sistema incluye funcionalidades como visualización del inventario, cálculo automático de 
-                totales con descuentos progresivos, y un proceso completo de checkout. Toda la interacción 
-                se realiza a través de la consola del navegador y cuadros de diálogo.
-            </p>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <i class="fas fa-gamepad"></i>
+                <span>Steam pero más barato</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" id="nav-inicio"> Inicio</a></li>
+                    <li><a href="#" id="nav-carrito"> Carrito</a></li>
+                    <li><a href="#" id="nav-catalogo"> Catálogo</a></li>
+                    <li><a href="#" id="nav-comprar"> Comprar</a></li>
+                </ul>
+            </nav>
+            <div class="cart-icon" id="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <div class="cart-count" id="cart-count">0</div>
+            </div>
         </div>
+    </header>
 
-        <button class="start-button" onclick="iniciarSimulador()">
-            🚀 Iniciar Simulador
-        </button>
 
-        <div class="console-info">
-            <strong>📋 Instrucciones:</strong>
-            <ul>
-                <li>Haz clic en "Iniciar Simulador" para comenzar</li>
-                <li>Abre la consola del navegador (F12) para ver los detalles</li>
-                <li>Sigue las instrucciones en los cuadros de diálogo</li>
-                <li>El simulador te guiará paso a paso</li>
-            </ul>
+    <main class="container">
+        <!-- seccion de Bienvenida -->
+         <section id="seccion-bienvenida">
+            <div class="welcome-content">
+                <div class="welcome-icon">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h1 class="welcome-title">¡Bienvenido a Estim!</h1>
+                <p class="welcome-description"> Explora nuestro increíble catálogo de juegos, agregá tus favoritos al carrito y disfrutá de descuentos especiales. 
+                Como cliente VIP, tendrás acceso a beneficios exclusivos en tus compras.
+                </p>
+                <button class="btn" id="btn-comenzar">
+                    <i class="fa fa-play"></i>Comenzar
+                </button>
+                <div id="vip-status" class="hidden">
+                    <div class="vip-badge">
+                        <i class="fas fa-crown"></i>
+                        <span>Cliente VIP</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sección de Catálogo -->
+        <section id="seccion-catalogo" class="hidden">
+            <h2 class="section-title">
+                <i class="fas fa-list"></i>
+                <span>Catálogo de Juegos</span>
+            </h2>
+
+            <div class="message message-info">
+                <i class="fas ga-info-circle"></i>
+                <span>¡Aprovecha nuestros descuentos! 10% por 3 juegos, 15% por 5 y 20% para clientes VIP</span>
+            </div>
+            <div class="filtros">
+                <div class="form-group">
+                    <input type="text" id="buscador" class="form-control" placeholder="Buscar por nombre o categoría...">
+                </div>
+            </div>
+
+            <div class="game-grid" id="lista-juegos">
+                <!-- Los juegos se cargarán dinámicamente acá. -->
+            </div>
+        </section>
+
+        <!-- Sección del Carrito -->
+         <section class="seccion-carrito" class="hidden">
+            <h2 class="section-title">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Tu carrito de Compras</span>
+            </h2>
+
+            <div class="carrito-vacio" class="message message-info">
+                <i class="fas fa-info-circle"></i>
+                <span>Tu carrito está vacío. !agregate algunos juegos y disfrutá con tus amigos!</span>
+            </div>
+
+            <div id="carrito-contenido" class="hidden">
+                <div class="table-responsive">
+                    <table class="cart-table">
+                        <thead>
+                            <tr>
+                                <th>Producto</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                                <th>Subtotal</th>
+                            </tr>
+                        </thead>
+                        <tbody id="items-carrito">
+                            <!-- Los productos del carrito se cargarán dinámicamente acá. -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="cart-summary">
+                    <div id="vip-discount" class="vip-discount hidden">
+                        <i class="fas fa-crown"></i>
+                        <span>¡Descuento VIP aplicado!</span>
+                    </div>
+
+                    <div class="summary-row">
+                        <span>Subtotal:</span>
+                        <span id="carrito-subtotal">$0.00</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Descuento:</span>
+                        <span id="carrito-descuento" class="discount">$0.00</span>
+                    </div>
+
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span id="carrito-total">$0.00</span>
+                </div>
+                <div class="cart-actions">
+                    <button class="btn btn-outline" id="btn-seguir-comprando">
+                        <i class="fas fa-arrow-left"></i> Seguir Comprando
+                    </button>
+                    <button class="btn btn-success" id="btn-procesar-compra">
+                        <i class="fas fa-check"></i> Procesar Compra
+                    </button>
+                </div>
+            </div>
+         </section>
+
+         <!-- Sección de Compra -->
+          <section id="seccion-compra" class="hidden">
+            <h2 class="section-title">
+                <i class="fas fa-credit-card"></i>
+                <span>Finalizar Compra</span>
+            </h2>
+
+            <div class="form-grid">
+                <div>
+                    <h3><i class="fas fa-truck"></i>Datos de Envío</h3>
+                        <div class="form-group">
+                        <label for="nombre">Nombre Completo</label>
+                        <input type="text" id="nombre" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">e-mail</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="direccion">Dirección</label>
+                            <input type="text" id="direccion" class="form-control" required>
+                        </div>
+                        <div class="form-grid">
+                            <label for="ciudad">Ciudad</label>
+                            <input type="text" id="ciudad" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cp">Código Postal</label>
+                            <input type="text" id="cp" class="form-control" required>
+                        </div>
+                </div>
+            </div>
+
+
+            <div>
+                <h3><i class="fas fa-money-bill-wave"></i>Método de Pago</h3>
+            
+            <div class="payment-methods">
+                <div class="payment-method" data-method="credito">
+                    <i class="fas fa-credit-card payment-icon"></i>
+                    <h4>Tarjeta de Crédito</h4>
+                    <p>Aceptamos todas las tarjetas</p>
+                </div>
+                <div class="payment-method" data-method="debito">
+                    <i class="fas -fa-credit-card payment-icon"></i>
+                    <h4>Tarjeta de débito</h4>
+                    <p>Pago directo desde tu cuenta</p>
+                </div>
+                <div class="payment-method" data-method="paypal">
+                    <i class="fas fa-paypal payment-icon"></i>
+                    <h4>PayPal</h4>
+                    <p>Pagá directo desde tu cuenta</p>
+                </div>
+                <div class="payment-method" data-method="efectivo">
+                    <i class="fas fa-money-bill payment-icon"></i>
+                    <h4>Efectivo</h4>
+                    <p>Pagá al recibir el producto</p>
+                </div>
+            </div>
+            <div id="tarjeta-detalles" class="hidden">
+                <div class="form-group">
+                    <label for="tarjeta-numero">Número de Tarjeta</label>
+                    <input type="text" id="tarjeta-numero" class="form-control" placeholder="1234 5678 9012 3456">
+                    <input type="text" id="tarjeta-nombre" class="form-control">
+                </div>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="tarjeta-vencimiento">Vencimiento (MM/AA)</label>
+                        <input type="text" id="tarjeta-vencimiento" class="form-control" placeholder="MM/AA">
+                    </div>
+                    <div class="form-group">
+                        <label for="tarjeta-cvv">CVV</label>
+                        <input type="text" id="tarjeta-cvv" class="form-control" placeholder="123">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-success" id="btn-confirmar-compra"><i class="fas fa-check-circle"></i>Confirmar Compra</button>
+            </div>
+        </div>
+        </section>
+
+        <!-- sección de Confirmación -->
+         <section id="seccion-confirmacion" class="hidden">
+            <div class="confirmacion-card">
+                <div class="confirmation-icon">
+                    <i class="fas -fa-check-circle"></i>
+                </div>
+                <h2 class="confirmation-title">¡Compra Exitosa!</h2>
+                <p>Gracias por tu compra. Tu pedido ha sifo procesado correctamente.</p>
+            </div>
+
+            <div class="confirmation-details">
+                <div class="confirmation-row">
+                    <span>Número de Orden:</span>
+                    <span class="order-number" id="orden-numero">GS-000000</span>
+                </div>
+                <div class="confirmation-row">
+                    <span>Fecha de Entrega:</span>
+                    <span id="fecha-entrega">DD/MM/AAAA</span>
+                </div>
+                <div class="confirmation-row">
+                    <span>Método de Pago:</span>
+                    <span id="metodo-pago">Tarjeta de Crédito</span>
+                </div>
+                <div class="comfirmation-row">
+                    <span>Total Pagado:</span>
+                    <span id="total-pagado">$0.00</span>
+                </div>
+                <div class="confirmation-row">
+                    <span>Enviado a:</span>
+                    <span id="direccion-envio">Calle Falsa 123, Ciudad</span>
+                </div>
+            
+            <p>Te enviamos un correo con los detalles de tu compra.</p>
+
+            <button class="btn" id="btn-volver-inicio">
+                <i class="fas fa-home"></i>Volver al Inicio
+            </button>
         </div>
     </div>
-
-    <script src="simulador.js"></script>
+    </section>
+    </main>
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Estim</h3>
+                    <p>Tu tineda de juegos favorita con los mejores precios y descuentos exclusivos para Clientes VIP.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Enlaces Rápidos</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Inicio</a></li>
+                        <li><a href="#">Catálogo</a></li>
+                        <li><a href="#">Ofertas</a></li>
+                        <li><a href="#">Nuevos Lanzamientos</a></li>
+                    </ul>
+                    <div class="footer-section">
+                        <h3>Contacto</h3>
+                        <ul class="footer-linkas">
+                            <li><a href="#">Atención al Cliente</a></li>
+                            <li><a href="#">Soporte Técnico</a></li>
+                            <li><a href="#">Política de Devoluciones</a></li>
+                        </ul>
+                        <div class="copyright">
+                            &copy: 2025 Estim. Todos los derechos reservados.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="js/simulador.js"></script>
 </body>
 </html>
