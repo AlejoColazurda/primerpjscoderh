@@ -42,8 +42,8 @@ body {
 }
 
 /* Header */
-header {
-    background: linear-gradient(135deg, #2a077a, #3a0ca3);
+/* header {
+
     color: white;
     padding: 15px 0;
     position: sticky;
@@ -101,7 +101,70 @@ nav a {
 
 nav a:hover, nav a.active {
     background-color: rgba(255, 255, 255, 0.3);
+} */
+
+/* Header */
+header {
+  background: linear-gradient(90deg, var(--primary), var(--secondary)) !important;
+  color: white;
 }
+
+header.scrolled {
+  background: var(--primary) !important;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.18);
+}
+
+.logo a {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  text-decoration: none;
+}
+
+nav a {
+  position: relative;
+  font-weight: 600;
+  letter-spacing: .2px;
+  background-color: transparent; /* limpia el fondo translúcido anterior */
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: -6px;
+  height: 3px;
+  background: var(--accent);
+  border-radius: 3px;
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform .2s ease;
+}
+
+nav a:hover,
+nav a:focus {
+  color: #fff;
+  text-shadow: 0 0 1px rgba(255,255,255,.2);
+}
+
+nav a:hover::after,
+nav a.active::after {
+  transform: scaleX(1);
+}
+
+/* Mobile menu contraste */
+#main-nav {
+  background: transparent;
+}
+#main-nav.active {
+  background: var(--primary);
+}
+
+/* Para que el header no tape el contenido en scroll anchors */
+main.container { scroll-margin-top: 80px; }
+
 
 .cart-icon {
     position: relative;
@@ -745,4 +808,30 @@ footer {
     .confirmation-details {
         padding: 10px;
     }
+}
+
+.filtros .form-control {
+    min-height: 40px; 
+}
+.quick-add .form-control {
+    max-width: 160px;
+}
+.quick-add .btn {
+    white-space: nowrap;
+}
+
+
+/* Pinceladas para el modal de producto */
+.swal2-popup {
+    border-radius: 14px;
+}
+.swal2-close {
+    color: var(--dark) !important;
+}
+.swiper-button-prev, .swiper-button-next {
+    color: #fff; 
+    text-shadow: 0 2px 6px rgba(0,0,0,.4);
+}
+.swiper-pagination-bullet-active {
+    background: var(--accent);
 }
